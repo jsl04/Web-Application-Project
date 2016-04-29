@@ -7,19 +7,26 @@
 
 library(shiny)
 library(datasets)
+library(dplyr)
+library(rCharts)
+library(markdown)
 
 shinyUI(pageWithSidebar(
   headerPanel("Interactive chart on comparing power to weight ratio to miles per gallon"),
   
   sidebarPanel(
-    selectInput(inputId="Transmission",
-                label = "Choose Transmission",
-                choices = c("Automatic","Manual"),
-                selected = "Manual"),
-    selectInput(inputId="Cylinders",
-                label = "Choose Cylinders",
-                choices = c(4,6,8),
-                selected = 4)
+    sliderInput("mpg",
+                "Range:",
+                min=10.4,
+                max =33.9,
+                value = c(10.4,33.9),
+                sep = ""),
+    sliderInput("Power_to_Weight",
+                "Range:",
+                min = 19.43574,
+                max = 93.83754,
+                value = c(19.43574,93.83754),
+                sep = "")
   ),
   mainPanel(
     showOutput("mychart","polycharts")

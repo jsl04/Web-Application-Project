@@ -19,9 +19,9 @@ mpg_data$model<- row.names(mpg_data)
 mpg_data$Power_To_Weight_Ratio<- mpg_data$hp/mpg_data$wt
 
 shinyServer(function(input,output){
-  output$mychart<- renderChart({
-    p1<-rPlot(input$Cylinders, input$Transmission,data = mpg_data, type= "point", tooltip= "#!function(item){ return 'Car Model: ' + item.model + ' Power to Weight Ratio: ' + item.Power_To_Weight_Ratio + ' MPG: ' + item.mpg }!#")
-    p1$addParams(dom='mychart')
+  
+  output$mychart<- renderChart2({
+    p1<-rPlot(input$Power_to_Weight,input$mpg,data = mpg_data, type= "point", tooltip= "#!function(item){ return 'Car Model: ' + item.model + ' Power to Weight Ratio: ' + item.Power_To_Weight_Ratio + ' MPG: ' + item.mpg }!#")
     return(p1)
   })
 })
